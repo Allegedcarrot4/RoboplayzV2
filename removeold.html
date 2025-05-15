@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google</title>
+    <link rel="icon" href="google.png" type="image/png">
+    
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background-color: #181818;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s, color 0.3s;
+            padding: 20px;
+        }
+
+        body.light-theme {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            background-color: #333;
+            color: #fff;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #6200ea;
+        }
+
+        button {
+            padding: 12px 20px;
+            font-size: 16px;
+            background-color: #6200ea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-bottom: 10px; /* Adds space between buttons */
+        }
+
+        button:hover {
+            background-color: #3700b3;
+        }
+
+        /* Theme Switcher Button */
+        .theme-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            font-size: 32px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .theme-switcher:hover {
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Theme Switcher -->
+    <button id="theme-switcher" class="theme-switcher">&#9788;</button>
+
+    <!-- Main Content -->
+    <h2>Enter a URL to Unblock (It does not work on websites with recaptcha):</h2>
+    <input type="text" id="urlInput" placeholder="https://example.com">
+    <button onclick="openHyper()">Unblock</button>
+    <button onclick="openHyperr()">Unblock (If class session is active)</button>
+
+    <!-- Home Button -->
+    <button onclick="window.location.href='index.html'">Home</button>
+
+    <script src="remove.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google</title>
+    <link rel="icon" href="google.png" type="image/png">
+    <link href="smash.css" rel="stylesheet" type="text/css" media="all">
+    <style>
+          .switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+        /* General styles for dark and light themes */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif; /* Using Poppins font for all elements */
+        }
+
+        body {
+            min-height: 100vh;
+            background-color: #181818;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            transition: background-color 0.3s, color 0.3s;
+            flex-direction: column;
+        }
+
+        body.light-theme {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Navbar styling */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 40px;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            z-index: 100;
+        }
+
+        .logo {
+            color: #fff;
+            font-size: 25px;
+            font-weight: 600;
+        }
+
+        .navbar a {
+            color: #fff;
+            font-size: 18px;
+            text-decoration: none;
+            margin-left: 35px;
+            transition: 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #f00;
+        }
+
+        .theme-switcher {
+            background: transparent;
+            border: none;
+            font-size: 32px; /* Bigger size for the icon */
+            color: #fff;
+            cursor: pointer;
+            transition: color 0.3s;
+            margin-left: 35px;
+        }
+
+        .theme-switcher:hover {
+            color: #ff4081;
+        }
+
+        /* Button Styling (Squares) */
+        .game-btn {
+            background: #6200ea;
+            border: none;
+            padding: 10px;
+            font-size: 18px;
+            border-radius: 12px;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+            text-align: center;
+            width: 150px;
+            height: 150px;
+            margin: 15px 0;
+            font-weight: 600;
+            display: inline-block;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            align-items: center;
+            text-transform: ;
+        }
+        
+        .open-btn {
+          background: blue;
+          border: none;
+          padding: 10px;
+          font-size: 18px;
+          border-radius: 12px;
+          color: white;
+          cursor: pointer;
+          transition: background 0.3s ease-in-out;
+          text-align: center;
+          width: 150px;
+          height: 150px;
+          margin: 15px 0;
+          font-weight: 600;
+          display: inline-block;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          align-items: center;
+        }
+
+        .game-btn:hover {
+            background: #3700b3;
+        }
+
+        /* Centering content */
+        .content-wrapper {
+            text-align: center;
+            margin-top: 100px;
+            z-index: 10;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <header class="header">
+        <div class="logo">
+            Robo.
+        </div>
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="remove.html">Unblock</a>
+            <button id="theme-switcher" class="theme-switcher">&#9788;</button>
+        </nav>
+    </header>
+
+
+    <div class="content-wrapper">
+        <!-- Game Buttons (Squares) -->
+        <button class="game-btn" onclick="open1v1()">
+            Play 1v1.lol
+        </button>
+        <button class="game-btn" onclick="openshapez()">
+            Play Shapez
+        </button>
+        <button class="game-btn" onclick="openpoki()">
+            Play Poly Track (Wait a little bit or else reload.)
+        </button>
+        <button class="game-btn" onclick="openpokimain()">
+            Play Poki (You can scroll down Just wait a little)
+        </button>
+        <button class="game-btn" onclick="openphantom()">
+            Play Phantom (Currently Phantom is fully down)
+        </button>
+        <button class="game-btn" onclick="openyoyo()">
+            Play Yohoho.io
+        </button>
+        <button class="game-btn" onclick="openzombie()">
+            Play Zombsroyale.io
+        </button>
+        <button class="game-btn" onclick="openretrobowlmain()">
+            Play RetroBowl College (Wait A little)
+        </button>
+        <button class="game-btn" onclick="opengranny()">
+            Play Granny (Not Working)
+        </button>
+        <button class="game-btn" onclick="opengetaway()">
+            Play Getaway Shootout
+        </button>
+        <button class="game-btn" onclick="openfront()">
+            Play Openfront
+        </button>
+        <button class="game-btn" onclick="openroadslow()">
+            Play Slow Roads
+        </button>
+        <button class="game-btn" onclick="openslope()">
+            Play Slope
+        </button>
+        <button class="game-btn" onclick="open()">
+            Play Low Taper Fade sim(Not Working)
+        </button>
+        <button class="game-btn" onclick="open()">
+            Play God (Not Working)
+        </button>
+        <button class="game-btn" onclick="opended()">
+            Play DeadShot
+        </button>
+        <a href="/secgam.html"><button class="open-btn">If class Session is active!</button></a>
+          
+    </div>
+
+    <script>
+      
+      
+function open1v1() {
+    // Get the URL from the input field
+    var url = "https://1v1-nine.vercel.app";
+
+    var win = window.open('about:blank', '_blank');
+
+    // Wait for the new window's document to be ready before making changes
+    win.document.write('<html><head><title>Google</title></head><body></body></html>');
+    win.document.close(); // Allow the body to be manipulated
+
+    // Set the title and favicon for the new window
+    win.document.title = 'Google';
+    var link = win.document.createElement('link');
+    link.rel = 'icon';
+    link.type = 'image/png';
+    link.href = 'google.png';  // You can change this to your favicon's URL
+    win.document.head.appendChild(link);
+
+    // Create an embed element and set its properties
+    var embed = win.document.createElement('embed');
+    embed.style.width = "100vw";
+    embed.style.height = "100vh";
+    embed.style.margin = "0";
+    embed.style.overflow = "hidden";
+    embed.style.top = "0";
+    embed.style.left = "0";
+    embed.style.position = "absolute";
+    embed.src = url;
+
+    // Append the embed element to the new window's document
+    win.document.body.appendChild(embed);
+}
+
+function openshapez() {
+    // Get the URL from the input field
+    var url = "https://shapez.io";
+ 
+    var win = window.open('about:blank', '_blank');
+    
+    if (!win) {
+        alert("Pop-up blocked. Please allow pop-ups.");
+        return; // Exit if window doesn't open
+    }
+
+    // Wait for the new window's document to be ready before making changes
+    win.document.write('<html><head><title>Google</title></head><body></body></html>');
+    win.document.close(); // Allow the body to be manipulated
+
+    // Set the title and favicon for the new window
+    win.document.title = 'Google';
+    var link = win.document.createElement('link');
+    link.rel = 'icon';
+    link.type = 'image/png';
+    link.href = 'google.png';  // You can change this to your favicon's URL
+    win.document.head.appendChild(link);
+
+    // Create an embed element and set its properties
+    var embed = win.document.createElement('embed');
+    embed.style.width = "100vw";
+    embed.style.height = "100vh";
+    embed.style.margin = "0";
+    embed.style.overflow = "hidden";
+    embed.style.top = "0";
+    embed.style.left = "0";
+    embed.style.position = "absolute";
+    embed.src = url;
+
+    // Append the embed element to the new window's document
+    win.document.body.appendChild(embed);
+}
+
+function openpoki() {
+    // Get the URL from the input field
+    var url = "https://polytrackgames.com";
+ 
+    var win = window.open('about:blank', '_blank');
+    
+    if (!win) {
+        alert("Pop-up blocked. Please allow pop-ups.");
+        return; // Exit if window doesn't open
+    }
+
+    // Wait for the new window's document to be ready before making changes
+    win.document.write('<html><head><title>Google</title></head><body></body></html>');
+    win.document.close(); // Allow the body to be manipulated
+
+    // Set the title and favicon for the new window
+    win.document.title = 'Google';
+    var link = win.document.createElement('link');
+    link.rel = 'icon';
+    link.type = 'image/png';
+    link.href = 'google.png';  // You can change this to your favicon's URL
+    win.document.head.appendChild(link);
+
+    // Create an embed element and set its properties
+    var embed = win.document.createElement('embed');
+    embed.style.width = "100vw";
+    embed.style.height = "100vh";
+    embed.style.margin = "0";
+    embed.style.overflow = "hidden";
+    embed.style.top = "0";
+    embed.style.left = "0";
+    embed.style.position = "absolute";
+    embed.src = url;
+
+    // Append the embed element to the new window's document
+    win.document.body.appendChild(embed);
+}
+
+function openpokimain() {
+    // Get the URL from the input field
+    var url = "https://poki-unblocked1.github.io";
+ 
+    var win = window.open('about:blank', '_blank');
+    
+    if (!win) {
+        alert("Pop-up blocked. Please allow pop-ups.");
+        return; // Exit if window doesn't open
+    }
+
+    // Wait for the new window's document to be ready before making changes
+    win.document.write('<html><head><title>Google</title></head><body></body></html>');
+    win.document.close(); // Allow the body to be manipulated
+
+    // Set the title and favicon for the new window
+    win.document.title = 'Google';
+    var link = win.document.createElement('link');
+    link.rel = 'icon';
+    link.type = 'image/png';
+    link.href = 'google.png';  // You can change this to your favicon's URL
+    win.document.head.appendChild(link);
+
+    // Create an embed element and set its properties
+    var embed = win.document.createElement('embed');
+    embed.style.width = "100vw";
+    embed.style.height = "100vh";
+    embed.style.margin = "0";
+    embed.style.overflow = "hidden";
+    embed.style.top = "0";
+    embed.style.left = "0";
+    embed.style.position = "absolute";
+    embed.src = url;
+
+    // Append the embed element to the new window's document
+    win.document.body.appendChild(embed);
+}
+
+function openphantom() {
+    // Get the URL from the input field
+    var url = "https://phantom-games.com/";
+ 
+    var win = window.open('about:blank', '_blank');
+    
+    if (!win) {
+        alert("Pop-up blocked. Please allow pop-ups.");
+        return; // Exit if window doesn't open
+    }
+
+    // Wait for the new window's document to be ready before making changes
+    win.document.write('<html><head><title>Google</title></head><body></body></html>');
+    win.document.close(); // Allow the body to be manipulated
+
+    // Set the title and favicon for the new window
+    win.document.title = 'Google';
+    var link = win.document.createElement('link');
+    link.rel = 'icon';
+    link.type = 'image/png';
+    link.href = 'google.png';  // You can change this to your favicon's URL
+    win.document.head.appendChild(link);
+
+    // Create an embed element and set its properties
+    var embed = win.document.createElement('embed');
+    embed.style.width = "100vw";
+    embed.style.height = "100vh";
+    embed.style.margin = "0";
+    embed.style.overflow = "hidden";
+    embed.style.top = "0";
+    embed.style.left = "0";
+    embed.style.position = "absolute";
+    embed.src = url;
+
+    // Append the embed element to the new window's document
+    win.document.body.appendChild(embed);
+}
+
+function openyoyo() {
+    // Get the URL from the input field
+    var url = "https://yohoho.io/";
+ 
+    var win = window.open('about:blank', '_blank');
+    
+    if (!win) {
+        alert("Pop-up blocked. Please allow pop-ups.");
+        return; // Exit if window doesn't open
+    }
+
+    // Wait for the new window's document to be ready before making changes
+    win.document.write('<html><head><title>Google</title></head><body></body></html>');
+    win.document.close(); // Allow the body to be manipulated
+
+    // Set the title and favicon for the new window
+    win.document.title = 'Google';
+    var link = win.document.createElement('link');
+    link.rel = 'icon';
+    link.type = 'image/png';
+    link.href = 'google.png';  // You can change this to your favicon's URL
+    win.document.head.appendChild(link);
+
+    // Create an embed element and set its properties
+    var embed = win.document.createElement('embed');
+    embed.style.width = "100vw";
+    embed.style.height = "100vh";
+    embed.style.margin = "0";
+    embed.style.overflow = "hidden";
+    embed.style.top = "0";
+    embed.style.left = "0";
+    embed.style.position = "absolute";
+    embed.src = url;
+
+    // Append the embed element to the new window's document
+    win.document.body.appendChild(embed);
+}
+
+function openzombie() {
+    // Get the URL from the input field
+    var url = "https://Zombsroyale.io";
+ 
+    var win = window.open('about:blank', '_blank');
+    
+    if (!win) {
+        alert("Pop-up blocked. Please allow pop-ups.");
+        return; // Exit if window doesn't open
+    }
+
+    // Wait for the new window's document to be ready before making changes
+    win.document.write('<html><head><title>Google</title></head><body></body></html>');
+    win.document.close(); // Allow the body to be manipulated
+
+    // Set the title and favicon for the new window
+    win.document.title = 'Google';
+    var link = win.document.createElement('link');
+    link.rel = 'icon';
+    link.type = 'image/png';
+    link.href = 'google.png';  // You can change this to your favicon's URL
+    win.document.head.appendChild(link);
+
+    // Create an embed element and set its properties
+    var embed = win.document.createElement('embed');
+    embed.style.width = "100vw";
+    embed.style.height = "100vh";
+    embed.style.margin = "0";
+    embed.style.overflow = "hidden";
+    embed.style.top = "0";
+    embed.style.left = "0";
+    embed.style.position = "absolute";
+    embed.src = url;
+
+    // Append the embed element to the new window's document
+    win.document.body.appendChild(embed);
+}
+
+function openretrobowlmain() {
+    // Get the URL from the input field
+    var url = "https://retrobowl.me/";
+ 
+    var win = window.open('about:blank', '_blank');
+    
+    if (!win) {
+        alert("Pop-up blocked. Please allow pop-ups.");
+        return; // Exit if window doesn't open
+    }
+
+    // Wait for the new window's document to be ready before making changes
+    win.document.write('<html><head><title>Google</title></head><body></body></html>');
+    win.document.close(); // Allow the body to be manipulated
+
+    // Set the title and favicon for the new window
+    win.document.title = 'Google';
+    var link = win.document.createElement('link');
+    link.rel = 'icon';
+    link.type = 'image/png';
+    link.href = 'google.png';  // You can change this to your favicon's URL
+    win.document.head.appendChild(link);
+
+    // Create an embed element and set its properties
+    var embed = win.document.createElement('embed');
+    embed.style.width = "100vw";
+    embed.style.height = "100vh";
+    embed.style.margin = "0";
+    embed.style.overflow = "hidden";
+    embed.style.top = "0";
+    embed.style.left = "0";
+    embed.style.position = "absolute";
+    embed.src = url;
+
+    // Append the embed element to the new window's document
+    win.document.body.appendChild(embed);
+}
+
+function opengranny() {
+    // Get the URL from the input field
+    var url = "https://www.gamepix.com/t/granny";
+ 
+    var win = window.open('about:blank', '_blank');
+    
+    if (!win) {
+        alert("Pop-up blocked. Please allow pop-ups.");
+        return; // Exit if window doesn't open
+    }
+
+    // Wait for the new window's document to be ready before making changes
+    win.document.write('<html><head><title>Google</title></head><body></body></html>');
+    win.document.close(); // Allow the body to be manipulated
+
+    // Set the title and favicon for the new window
+    win.document.title = 'Google';
+    var link = win.document.createElement('link');
+    link.rel = 'icon';
+    link.type = 'image/png';
+    link.href = 'google.png';  // You can change this to your favicon's URL
+    win.document.head.appendChild(link);
+
+    // Create an embed element and set its properties
+    var embed = win.document.createElement('embed');
+    embed.style.width = "100vw";
+    embed.style.height = "100vh";
+    embed.style.margin = "0";
+    embed.style.overflow = "hidden";
+    embed.style.top = "0";
+    embed.style.left = "0";
+    embed.style.position = "absolute";
+    embed.src = url;
+
+    // Append the embed element to the new window's document
+    win.document.body.appendChild(embed);
+}
+
+function opengetaway() {
+    // Get the URL from the input field
+    var url = "https://ducklife4.github.io/play/getaway-shootout.html";
+ 
+    var win = window.open('about:blank', '_blank');
+    
+    if (!win) {
+        alert("Pop-up blocked. Please allow pop-ups.");
+        return; // Exit if window doesn't open
+    }
+
+    // Wait for the new window's document to be ready before making changes
+    win.document.write('<html><head><title>Google</title></head><body></body></html>');
+    win.document.close(); // Allow the body to be manipulated
+
+    // Set the title and favicon for the new window
+    win.document.title = 'Google';
+    var link = win.document.createElement('link');
+    link.rel = 'icon';
+    link.type = 'image/png';
+    link.href = 'google.png';  // You can change this to your favicon's URL
+    win.document.head.appendChild(link);
+
+    // Create an embed element and set its properties
+    var embed = win.document.createElement('embed');
+    embed.style.width = "100vw";
+    embed.style.height = "100vh";
+    embed.style.margin = "0";
+    embed.style.overflow = "hidden";
+    embed.style.top = "0";
+    embed.style.left = "0";
+    embed.style.position = "absolute";
+    embed.src = url;
+
+    // Append the embed element to the new window's document
+    win.document.body.appendChild(embed);
+}
+
+function openfront() {
+    // Get the URL from the input field
+    var url = "https://openfront.io";
+ 
+    var win = window.open('about:blank', '_blank');
+    
+    if (!win) {
+        alert("Pop-up blocked. Please allow pop-ups.");
+        return; // Exit if window doesn't open
+    }
+
+    // Wait for the new window's document to be ready before making changes
+    win.document.write('<html><head><title>Google</title></head><body></body></html>');
+    win.document.close(); // Allow the body to be manipulated
+
+    // Set the title and favicon for the new window
+    win.document.title = 'Google';
+    var link = win.document.createElement('link');
+    link.rel = 'icon';
+    link.type = 'image/png';
+    link.href = 'google.png';  // You can change this to your favicon's URL
+    win.document.head.appendChild(link);
+
+    // Create an embed element and set its properties
+    var embed = win.document.createElement('embed');
+    embed.style.width = "100vw";
+    embed.style.height = "100vh";
+    embed.style.margin = "0";
+    embed.style.overflow = "hidden";
+    embed.style.top = "0";
+    embed.style.left = "0";
+    embed.style.position = "absolute";
+    embed.src = url;
+
+    // Append the embed element to the new window's document
+    win.document.body.appendChild(embed);
+}
+
+function openroadslow() {
+    // Get the URL from the input field
+    var url = "https://slowroads.io";
+ 
+    var win = window.open('about:blank', '_blank');
+    
+    if (!win) {
+        alert("Pop-up blocked. Please allow pop-ups.");
+        return; // Exit if window doesn't open
+    }
+
+    // Wait for the new window's document to be ready before making changes
+    win.document.write('<html><head><title>Google</title></head><body></body></html>');
+    win.document.close(); // Allow the body to be manipulated
+
+    // Set the title and favicon for the new window
+    win.document.title = 'Google';
+    var link = win.document.createElement('link');
+    link.rel = 'icon';
+    link.type = 'image/png';
+    link.href = 'google.png';  // You can change this to your favicon's URL
+    win.document.head.appendChild(link);
+
+    // Create an embed element and set its properties
+    var embed = win.document.createElement('embed');
+    embed.style.width = "100vw";
+    embed.style.height = "100vh";
+    embed.style.margin = "0";
+    embed.style.overflow = "hidden";
+    embed.style.top = "0";
+    embed.style.left = "0";
+    embed.style.position = "absolute";
+    embed.src = url;
+
+    // Append the embed element to the new window's document
+    win.document.body.appendChild(embed);
+}
+
+function openslope() {
+    // Get the URL from the input field
+    var url = "https://slope-game.github.io/";
+ 
+    var win = window.open('about:blank', '_blank');
+    
+    if (!win) {
+        alert("Pop-up blocked. Please allow pop-ups.");
+        return; // Exit if window doesn't open
+    }
+
+    // Wait for the new window's document to be ready before making changes
+    win.document.write('<html><head><title>Google</title></head><body></body></html>');
+    win.document.close(); // Allow the body to be manipulated
+
+    // Set the title and favicon for the new window
+    win.document.title = 'Google';
+    var link = win.document.createElement('link');
+    link.rel = 'icon';
+    link.type = 'image/png';
+    link.href = 'google.png';  // You can change this to your favicon's URL
+    win.document.head.appendChild(link);
+
+    // Create an embed element and set its properties
+    var embed = win.document.createElement('embed');
+    embed.style.width = "100vw";
+    embed.style.height = "100vh";
+    embed.style.margin = "0";
+    embed.style.overflow = "hidden";
+    embed.style.top = "0";
+    embed.style.left = "0";
+    embed.style.position = "absolute";
+    embed.src = url;
+
+    // Append the embed element to the new window's document
+    win.document.body.appendChild(embed);
+}
+
+function opended() {
+    // Get the URL from the input field
+    var url = "https://deadshot.io/";
+ 
+    var win = window.open('about:blank', '_blank');
+    
+    if (!win) {
+        alert("Pop-up blocked. Please allow pop-ups.");
+        return; // Exit if window doesn't open
+    }
+
+    // Wait for the new window's document to be ready before making changes
+    win.document.write('<html><head><title>Google</title></head><body></body></html>');
+    win.document.close(); // Allow the body to be manipulated
+
+    // Set the title and favicon for the new window
+    win.document.title = 'Google';
+    var link = win.document.createElement('link');
+    link.rel = 'icon';
+    link.type = 'image/png';
+    link.href = 'google.png';  // You can change this to your favicon's URL
+    win.document.head.appendChild(link);
+
+    // Create an embed element and set its properties
+    var embed = win.document.createElement('embed');
+    embed.style.width = "100vw";
+    embed.style.height = "100vh";
+    embed.style.margin = "0";
+    embed.style.overflow = "hidden";
+    embed.style.top = "0";
+    embed.style.left = "0";
+    embed.style.position = "absolute";
+    embed.src = url;
+
+    // Append the embed element to the new window's document
+    win.document.body.appendChild(embed);
+}
+    </script>
+</body>
+
+</html>

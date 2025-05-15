@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google</title>
+    <link rel="icon" href="google.png" type="image/png">
+    
+    <!-- Google Fonts for Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+    <!-- Boxicons CDN for icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <style>
+        /* General styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        /* Dark theme background and text */
+        body {
+            min-height: 100vh;
+            background-color: #181818; /* Dark background color */
+            color: #fff; /* Light text color for dark theme */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Light theme background and text */
+        body.light-theme {
+            background-color: #f9f9f9; /* Light background color */
+            color: #333; /* Dark text color for light theme */
+        }
+
+        /* Glassmorphism effect for navbar background */
+        .nav-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            z-index: -1;
+        }
+
+        /* Header styling */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 40px;
+            background: rgba(0, 0, 0, 0.8); /* Dark transparent background for navbar */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            z-index: 100;
+        }
+
+        .header.light-theme {
+            background: rgba(255, 255, 255, 0.8); /* Light transparent background for navbar */
+        }
+
+        .logo {
+            color: #fff;
+            font-size: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: default;
+        }
+
+        .header.light-theme .logo {
+            color: #333; /* Dark logo text for light theme */
+        }
+
+        /* Navbar link styling */
+        .navbar a {
+            color: #fff;
+            font-size: 18px;
+            text-decoration: none;
+            margin-left: 35px;
+            transition: 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #f00;
+        }
+
+        .header.light-theme .navbar a {
+            color: #333; /* Dark links for light theme */
+        }
+
+        /* Menu icon for mobile */
+        #menu-icon {
+            font-size: 36px;
+            color: #fff;
+            display: none;
+            cursor: pointer;
+        }
+
+        .header.light-theme #menu-icon {
+            color: #333; /* Dark menu icon for light theme */
+        }
+
+        /* Theme Switcher button */
+        .theme-switcher {
+            font-size: 24px;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        .header.light-theme .theme-switcher {
+            color: #333; /* Dark theme switcher icon for light theme */
+        }
+
+        /* Mobile view adjustments */
+        @media (max-width: 768px) {
+            #menu-icon {
+                display: block;
+            }
+            .navbar {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                padding: 0.5rem 4%;
+                display: none;
+                background-color: rgba(0, 0, 0, 0.8);
+            }
+            .navbar.active {
+                display: block;
+            }
+            .navbar a {
+                display: block;
+                margin: 1.5rem 0;
+            }
+            .nav-bg {
+                position: absolute;
+                top: 79px;
+                left: 0;
+                width: 100%;
+                height: 295px;
+                background: rgba(255, 255, 255, 0.1);
+                border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(10px);
+                z-index: 99;
+                display: none;
+            }
+            .nav-bg.active {
+                display: block;
+            }
+        }
+
+        /* Centering the content */
+        .content-wrapper {
+            text-align: center;
+            z-index: 10;
+            padding-top: 120px; /* Space for the header */
+        }
+
+        /* Glassmorphism boxes */
+        .box {
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+            backdrop-filter: blur(10px); /* Glass effect */
+            border-radius: 10px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            color: #fff;
+            text-align: center;
+            font-size: 24px;
+            width: 300px;
+            margin: 20px;
+            z-index: 10;
+            transition: color 0.3s;
+        }
+
+        /* Light theme box styles */
+        .box.light-theme {
+            background: rgba(0, 0, 0, 0.2); /* Darker background for light mode */
+            color: #333; /* Dark text color for light mode */
+        }
+
+        .box h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .box p {
+            font-size: 18px;
+        }
+
+        /* Flexbox container to center multiple boxes */
+        .box-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+    </style>
+</head>
+<body class="dark-theme">
+    <header class="header">
+        <a href="#" class="logo">About Me</a>
+        <i class='bx bx-menu' id="menu-icon"></i>
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="smash.html">Smashkarts</a>
+            <a href="remove.html">Unblock</a>
+            <a href="#">About</a>
+        </nav>
+        <!-- Theme Switcher -->
+        <i class="bx bx-moon theme-switcher" id="theme-switcher"></i>
+    </header>
+    
+    <div class="nav-bg"></div>
+
+    <!-- Content section with multiple Glassmorphism boxes -->
+    <div class="content-wrapper">
+        <div class="box-container">
+            <div class="box">
+                <h2>Who Am I?</h2>
+                <p>I am a web developer passionate about creating beautiful and functional websites.</p>
+            </div>
+            <div class="box">
+                <h2>My Skills</h2>
+                <p>JavaScript, HTML, CSS, React, Node.js, and more.</p>
+            </div>
+            <div class="box">
+                <h2>Let's Connect</h2>
+                <p>Feel free to reach out to me in person or email.</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Select elements
+        const menuIcon = document.querySelector('#menu-icon');
+        const navbar = document.querySelector('.navbar');
+        const navbg = document.querySelector('.nav-bg');
+        const themeSwitcher = document.querySelector('#theme-switcher');
+        const body = document.body;
+        const header = document.querySelector('.header');
+        const boxes = document.querySelectorAll('.box');
+
+        // Toggle classes for menu icon, navbar, and background on click
+        menuIcon.addEventListener('click', () => {
+            menuIcon.classList.toggle('bx-x');
+            navbar.classList.toggle('active');
+            navbg.classList.toggle('active');
+        });
+
+        // Theme switching logic
+        themeSwitcher.addEventListener('click', () => {
+            body.classList.toggle('light-theme');
+            header.classList.toggle('light-theme');
+            boxes.forEach(box => {
+                box.classList.toggle('light-theme');
+            });
+
+            if (body.classList.contains('light-theme')) {
+                themeSwitcher.classList.remove('bx-moon');
+                themeSwitcher.classList.add('bx-sun');
+                localStorage.setItem('theme', 'light'); // Save light theme preference
+            } else {
+                themeSwitcher.classList.remove('bx-sun');
+                themeSwitcher.classList.add('bx-moon');
+                localStorage.setItem('theme', 'dark'); // Save dark theme preference
+            }
+        });
+
+        // Apply saved theme based on localStorage preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            body.classList.add('light-theme');
+            header.classList.add('light-theme');
+            themeSwitcher.classList.remove('bx-moon');
+            themeSwitcher.classList.add('bx-sun');
+            boxes.forEach(box => box.classList.add('light-theme'));
+        }
+    </script>
+</body>
+</html>

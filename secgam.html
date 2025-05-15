@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google</title>
+    <link rel="icon" href="google.png" type="image/png">
+    
+    <style>
+        /* Styles for the iframe */
+        #gameEmbed {
+            width: 100vw;  /* Full viewport width */
+            height: 100vh; /* Full viewport height */
+            border: none;  /* Remove border */
+            position: absolute; /* Position it on top of everything */
+            top: 0;
+            left: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif; /* Using Poppins font for all elements */
+        }
+
+        body {
+            min-height: 100vh;
+            background-color: #181818;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            transition: background-color 0.3s, color 0.3s;
+            flex-direction: column;
+        }
+
+        body.light-theme {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Navbar styling */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 40px;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            z-index: 100;
+        }
+
+        .logo {
+            color: #fff;
+            font-size: 25px;
+            font-weight: 600;
+        }
+
+        .navbar a {
+            color: #fff;
+            font-size: 18px;
+            text-decoration: none;
+            margin-left: 35px;
+            transition: 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #f00;
+        }
+
+        .theme-switcher {
+            background: transparent;
+            border: none;
+            font-size: 32px; /* Bigger size for the icon */
+            color: #fff;
+            cursor: pointer;
+            transition: color 0.3s;
+            margin-left: 35px;
+        }
+
+        .theme-switcher:hover {
+            color: #ff4081;
+        }
+
+        /* Button Styling */
+        .btn {
+            background: #6200ea;
+            border: none;
+            padding: 14px 30px;
+            font-size: 18px;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 15px 0;
+            font-weight: 600;
+            align-items: center;
+        }
+
+        .btn:hover {
+            background: #3700b3;
+        }
+
+        /* Centering content */
+        .content-wrapper {
+            text-align: center;
+            margin-top: 100px;
+            z-index: 10;
+        }
+
+        /* Hidden navbar when iframe is active */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header class="header" id="navbar">
+        <div class="logo">
+            Robo.
+        </div>
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="remove.html">Unblock</a>
+            <!-- Theme Switcher Icon inside Navbar -->
+            <button id="theme-switcher" class="theme-switcher">&#9788;</button>
+        </nav>
+    </header>
+
+    <!-- Game buttons -->
+    <div class="content-wrapper">
+        <button class="btn" onclick="openGame('https://1v1-nine.vercel.app')">Play 1v1</button>
+        <button class="btn" onclick="openGame('https://shapez.io')">Play Shapez</button>
+        <button class="btn" onclick="openGame('https://polytrackgames.com')">Play Poki</button>
+        <button class="btn" onclick="openGame('https://poki-unblocked1.github.io')">Poki Unblocked</button>
+        <button class="btn" onclick="openGame('https://phantom-games.com/')">Play Phantom</button>
+        <button class="btn" onclick="openGame('https://yohoho.io/')">Play Yohoho</button>
+        <button class="btn" onclick="openGame('https://Zombsroyale.io')">Play Zombs Royale</button>
+        <button class="btn" onclick="openGame('https://retrobowl.me/')">Play Retro Bowl</button>
+        <button class="btn" onclick="openGame('https://www.gamepix.com/t/granny')">Play Granny</button>
+        <button class="btn" onclick="openGame('https://ducklife4.github.io/play/getaway-shootout.html')">Play Getaway</button>
+        <button class="btn" onclick="openGame('https://openfront.io')">Play Openfront</button>
+        <button class="btn" onclick="openGame('https://slowroads.io')">Play Slowroads</button>
+        <button class="btn" onclick="openGame('https://slope-game.github.io/')">Play Slope</button>
+        <button class="btn" onclick="openGame('https://deadshot.io')">Play Deadshot</button>
+    </div>
+
+    <!-- The embed area for the games -->
+    <div id="gameContainer" style="position:relative; width: 100%; height: 100%;"></div>
+
+    <script>
+function openGame(url) {
+    // Change the URL in the address bar without reloading the page
+    history.pushState(null, null, "/secgame");
+
+    // Hide the navbar
+    document.getElementById('navbar').classList.add('hidden');
+    
+    // Hide the game buttons
+    document.querySelector('.content-wrapper').style.display = 'none';
+
+    // Create the embed element
+    var embed = document.createElement('embed');
+    embed.style.width = "100vw";
+    embed.style.height = "100vh";
+    embed.style.margin = "0";
+    embed.style.overflow = "hidden";
+    embed.style.top = "0";
+    embed.style.left = "0";
+    embed.style.position = "absolute";
+    embed.src = url;
+
+    // Append the embed element to the body of the current page
+    document.body.appendChild(embed);
+
+    // Prevent the spacebar from causing a reload or scroll behavior
+    window.addEventListener('keydown', function(event) {
+        // Prevent default spacebar behavior
+        if (event.key === " " || event.keyCode === 32) {
+            event.preventDefault();
+        }
+    });
+
+    // Prevent form submission (space sometimes causes this in certain forms)
+    document.body.addEventListener('keydown', function(event) {
+        if ((event.key === " " || event.keyCode === 32) && event.target.tagName !== "TEXTAREA" && event.target.tagName !== "INPUT") {
+            event.preventDefault();
+        }
+    });
+}
+
+    </script>
+</body>
+</html>

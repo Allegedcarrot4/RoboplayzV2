@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The web site of roboplayz</title>
+    <!-- The style.css file allows you to change the look of your web pages.
+         If you include the next line in all your web pages, they will all share the same look.
+         This makes it easier to make new pages for your site. -->
+    <link href="/style.css" rel="stylesheet" type="text/css" media="all">
+  </head>
+  <body>
+        <!-- Cloak the site in an about:blank page and toggle about:blank on startup.  button is game-button -->
+        <button id="game-button" onclick="openabouttab()">Open Tab</button>
+          
+        
+        
+        <!-- Quick open another site with one press. Separate multiple keystrokes with commas, input-field (which key), change other one to web-input(url)  -->
+        
+    <div>
+        <label for="keyInput">Enter key:</label>
+        <input type="text" id="keyInput">
+    </div>
+    <div>
+        <label for="urlInput">Enter URL (without https://):</label>
+        <input type="text" id="urlInput">
+    </div>
+    <button onclick="saveMapping()">Save Mapping</button>
+        <!-- Change the title and icon of the page.  -->
+        
+            <div>
+        <label for="titleInput">Enter Title:</label>
+        <input type="text" id="titleInput">
+    </div>
+
+    <!-- Icon Input -->
+    <div>
+        <label for="iconInput">Enter Icon URL:</label>
+        <input type="text" id="iconInput">
+    </div>
+
+    <!-- Save Button -->
+    <button onclick="saveSettings()">Save Settings</button>
+        
+  
+        
+        
+        <script>
+    function openabouttab() {
+    // Cloak the site in an about:blank page and toggle about:blank on startup.  button is game-button
+    var main = "https://google.com/";
+ 
+    var win = window.open('about:blank', '_blank');
+    
+    if (!win) {
+        alert("Pop-up blocked. Please allow pop-ups.");
+        return; 
+    }
+
+    
+    win.document.write('<html><head><title>About: Blank</title></head><body></body></html>');
+    win.document.close(); 
+
+   
+    win.document.title = 'Google';
+    var link = win.document.createElement('link');
+    link.rel = 'icon';
+    link.type = 'image/png';
+    win.document.head.appendChild(link);
+
+    
+    var embed = win.document.createElement('embed');
+    embed.style.width = "100vw";
+    embed.style.height = "100vh";
+    embed.style.margin = "0";
+    embed.style.overflow = "hidden";
+    embed.style.top = "0";
+    embed.style.left = "0";
+    embed.style.position = "absolute";
+    embed.src = main;
+
+    win.document.body.appendChild(embed);
+}
+function loadMapping() {
+            const keyMapping = JSON.parse(localStorage.getItem('keyMapping'));
+            if (keyMapping) {
+                document.getElementById('keyInput').value = keyMapping.key;
+                document.getElementById('urlInput').value = keyMapping.url;
+            }
+        }
+
+
+        function saveMapping() {
+            const key = document.getElementById('keyInput').value.trim();
+            let url = document.getElementById('urlInput').value.trim();
+
+            if (url && !/^https?:\/\//i.test(url)) {
+                url = 'https://' + url;
+            }
+
+            if (key && url) {
+                const keyMapping = { key, url };
+                localStorage.setItem('keyMapping', JSON.stringify(keyMapping));
+                alert('Mapping saved!');
+            } else {
+                alert('Please enter both a key and a URL.');
+            }
+        }
+
+        
+        document.addEventListener('keydown', function(event) {
+            const keyMapping = JSON.parse(localStorage.getItem('keyMapping'));
+            if (keyMapping && event.key === keyMapping.key) {
+                // Redirect the current tab to the stored URL
+                window.location.href = keyMapping.url;
+            }
+        });
+
+     
+        window.onload = loadMapping;
+
+
+
+    
+        function loadSettings() {
+            const settings = JSON.parse(localStorage.getItem('pageSettings'));
+            if (settings) {
+                document.getElementById('titleInput').value = settings.title || '';
+                document.getElementById('iconInput').value = settings.icon || '';
+            }
+        }
+
+       
+        function saveSettings() {
+            const title = document.getElementById('titleInput').value.trim();
+            const icon = document.getElementById('iconInput').value.trim();
+
+            if (title || icon) {
+                const settings = { title, icon };
+                localStorage.setItem('pageSettings', JSON.stringify(settings));
+                alert('Settings saved!');
+            } else {
+                alert('Please enter a title or icon.');
+            }
+        }
+
+  
+        window.onload = loadSettings;
+ 
+        function loadSettings() {
+            const settings = JSON.parse(localStorage.getItem('pageSettings'));
+
+            if (settings) {
+                // Update the title if it's provided
+                if (settings.title) {
+                    document.title = settings.title;
+                }
+
+                // Update the favicon if it's provided
+                if (settings.icon) {
+                    const favicon = document.getElementById('favicon');
+                    favicon.href = settings.icon;
+                }
+            }
+        }
+
+        window.onload = loadSettings;
+</script>
+  </body>
+</html>
